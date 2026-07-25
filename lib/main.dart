@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               onPressed: () async {
                 await http.post(
-                  Uri.parse('http://localhost:3000/api/signup'),
+                  Uri.parse('https://fincorebackend.vercel.app/api/signup'),
                   headers: {'Content-Type': 'application/json'},
                   body: jsonEncode({
                     'username': sUser.text,
@@ -276,21 +276,27 @@ class _DashboardScreenState extends State<DashboardScreen>
   }
 
   Future<void> _fetchLogs() async {
-    final res = await http.get(Uri.parse('http://localhost:3000/api/logs'));
+    final res = await http.get(
+      Uri.parse('https://fincorebackend.vercel.app/api/logs'),
+    );
     if (res.statusCode == 200) {
       setState(() => _logs = jsonDecode(res.body)['data']);
     }
   }
 
   Future<void> _fetchStock() async {
-    final res = await http.get(Uri.parse('http://localhost:3000/api/stock'));
+    final res = await http.get(
+      Uri.parse('https://fincorebackend.vercel.app/api/stock'),
+    );
     if (res.statusCode == 200) {
       setState(() => _stock = jsonDecode(res.body)['data']);
     }
   }
 
   Future<void> _fetchPayroll() async {
-    final res = await http.get(Uri.parse('http://localhost:3000/api/payroll'));
+    final res = await http.get(
+      Uri.parse('https://fincorebackend.vercel.app/api/payroll'),
+    );
     if (res.statusCode == 200) {
       setState(() => _payroll = jsonDecode(res.body)['data']);
     }
@@ -298,7 +304,7 @@ class _DashboardScreenState extends State<DashboardScreen>
 
   Future<void> _fetchPosSales() async {
     final res = await http.get(
-      Uri.parse('http://localhost:3000/api/pos/sales'),
+      Uri.parse('https://fincorebackend.vercel.app/api/pos/sales'),
     );
     if (res.statusCode == 200) {
       setState(() => _posSales = jsonDecode(res.body)['data']);
@@ -306,16 +312,16 @@ class _DashboardScreenState extends State<DashboardScreen>
   }
 
   Future<void> _fetchWarehouses() async {
-    final res = await http.get(
-      Uri.parse('http://localhost:3000/api/warehouses'),
-    );
+    final res = await http.get(Uri.parse('https://fincorebackend.vercel.app'));
     if (res.statusCode == 200) {
       setState(() => _warehouses = jsonDecode(res.body)['data']);
     }
   }
 
   Future<void> _fetchPostings() async {
-    final res = await http.get(Uri.parse('http://localhost:3000/api/postings'));
+    final res = await http.get(
+      Uri.parse('https://fincorebackend.vercel.app/api/postings'),
+    );
     if (res.statusCode == 200) {
       setState(() => _postings = jsonDecode(res.body)['data']);
     }
@@ -334,7 +340,10 @@ class _DashboardScreenState extends State<DashboardScreen>
       _posSales.fold(0.0, (sum, item) => sum + (item['total_price'] ?? 0.0));
 
   void _downloadFile(String endpoint, String filename) {
-    html.window.open('http://localhost:3000/api/export/$endpoint', '_blank');
+    html.window.open(
+      'https://fincorebackend.vercel.app/api/export/$endpoint',
+      '_blank',
+    );
   }
 
   void _showAddVoucherDialog() {
@@ -388,7 +397,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               ),
               onPressed: () async {
                 await http.post(
-                  Uri.parse('http://localhost:3000/api/logs'),
+                  Uri.parse('https://fincorebackend.vercel.app/api/logs'),
                   headers: {'Content-Type': 'application/json'},
                   body: jsonEncode({
                     'voucher_type': voucherType,
@@ -471,7 +480,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               ),
               onPressed: () async {
                 await http.post(
-                  Uri.parse('http://localhost:3000/api/stock'),
+                  Uri.parse('https://fincorebackend.vercel.app/api/stock'),
                   headers: {'Content-Type': 'application/json'},
                   body: jsonEncode({
                     'item_name': nameController.text,
@@ -525,7 +534,7 @@ class _DashboardScreenState extends State<DashboardScreen>
             ),
             onPressed: () async {
               await http.post(
-                Uri.parse('http://localhost:3000/api/warehouses'),
+                Uri.parse('https://fincorebackend.vercel.app'),
                 headers: {'Content-Type': 'application/json'},
                 body: jsonEncode({
                   'warehouse_name': nameCtrl.text,
@@ -587,7 +596,7 @@ class _DashboardScreenState extends State<DashboardScreen>
             ),
             onPressed: () async {
               await http.post(
-                Uri.parse('http://localhost:3000/api/payroll'),
+                Uri.parse('https://fincorebackend.vercel.app/api/payroll'),
                 headers: {'Content-Type': 'application/json'},
                 body: jsonEncode({
                   'worker_name': nameCtrl.text,
@@ -662,7 +671,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               ),
               onPressed: () async {
                 await http.post(
-                  Uri.parse('http://localhost:3000/api/pos/sales'),
+                  Uri.parse('https://fincorebackend.vercel.app/api/pos/sales'),
                   headers: {'Content-Type': 'application/json'},
                   body: jsonEncode({
                     'item_id': selectedItem['id'],
