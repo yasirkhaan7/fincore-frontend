@@ -19,7 +19,7 @@ class _DashboardScreenState extends State<DashboardScreen>
   List<dynamic> _posSales = [];
   List<dynamic> _warehouses = [];
   bool _isLoading = true;
-  String _searchQuery = '';
+  final String _searchQuery = '';
 
   final List<Map<String, String>> _chatMessages = [
     {
@@ -349,7 +349,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               mainAxisSize: MainAxisSize.min,
               children: [
                 DropdownButtonFormField<String>(
-                  value: voucherType,
+                  initialValue: voucherType,
                   decoration: const InputDecoration(
                     labelText: 'Voucher Type',
                     prefixIcon: Icon(Icons.receipt),
@@ -386,7 +386,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                 ),
                 const SizedBox(height: 12),
                 DropdownButtonFormField<String>(
-                  value: selectedCategory,
+                  initialValue: selectedCategory,
                   decoration: const InputDecoration(
                     labelText: 'Expense Category',
                     prefixIcon: Icon(Icons.category),
@@ -401,7 +401,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                 ),
                 const SizedBox(height: 12),
                 DropdownButtonFormField<String>(
-                  value: accountHead,
+                  initialValue: accountHead,
                   decoration: const InputDecoration(
                     labelText: 'Account Head',
                     prefixIcon: Icon(Icons.account_balance),
@@ -550,7 +550,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<int>(
-                value: selectedWarehouseId,
+                initialValue: selectedWarehouseId,
                 decoration: const InputDecoration(
                   labelText: 'Assigned Warehouse',
                   prefixIcon: Icon(Icons.warehouse),
@@ -710,7 +710,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               mainAxisSize: MainAxisSize.min,
               children: [
                 DropdownButtonFormField<dynamic>(
-                  value: selectedItem,
+                  initialValue: selectedItem,
                   decoration: const InputDecoration(
                     labelText: 'Select Stock Item',
                     prefixIcon: Icon(Icons.inventory_2),

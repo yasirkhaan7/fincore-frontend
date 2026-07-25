@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() => _isLoading = true);
     try {
       final response = await http.post(
-        Uri.parse('http://localhost:3000/api/login'),
+        Uri.parse('https://fincorebackend.vercel.app/api/login'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'username': username, 'password': password}),
       );
@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
-                value: sRole,
+                initialValue: sRole,
                 decoration: const InputDecoration(labelText: 'User Role'),
                 items: ['Admin', 'Store Clerk', 'Employee']
                     .map((r) => DropdownMenuItem(value: r, child: Text(r)))
@@ -277,42 +277,48 @@ class _DashboardScreenState extends State<DashboardScreen>
 
   Future<void> _fetchLogs() async {
     final res = await http.get(Uri.parse('http://localhost:3000/api/logs'));
-    if (res.statusCode == 200)
+    if (res.statusCode == 200) {
       setState(() => _logs = jsonDecode(res.body)['data']);
+    }
   }
 
   Future<void> _fetchStock() async {
     final res = await http.get(Uri.parse('http://localhost:3000/api/stock'));
-    if (res.statusCode == 200)
+    if (res.statusCode == 200) {
       setState(() => _stock = jsonDecode(res.body)['data']);
+    }
   }
 
   Future<void> _fetchPayroll() async {
     final res = await http.get(Uri.parse('http://localhost:3000/api/payroll'));
-    if (res.statusCode == 200)
+    if (res.statusCode == 200) {
       setState(() => _payroll = jsonDecode(res.body)['data']);
+    }
   }
 
   Future<void> _fetchPosSales() async {
     final res = await http.get(
       Uri.parse('http://localhost:3000/api/pos/sales'),
     );
-    if (res.statusCode == 200)
+    if (res.statusCode == 200) {
       setState(() => _posSales = jsonDecode(res.body)['data']);
+    }
   }
 
   Future<void> _fetchWarehouses() async {
     final res = await http.get(
       Uri.parse('http://localhost:3000/api/warehouses'),
     );
-    if (res.statusCode == 200)
+    if (res.statusCode == 200) {
       setState(() => _warehouses = jsonDecode(res.body)['data']);
+    }
   }
 
   Future<void> _fetchPostings() async {
     final res = await http.get(Uri.parse('http://localhost:3000/api/postings'));
-    if (res.statusCode == 200)
+    if (res.statusCode == 200) {
       setState(() => _postings = jsonDecode(res.body)['data']);
+    }
   }
 
   double _calculateTotalExpenses() =>
@@ -346,7 +352,7 @@ class _DashboardScreenState extends State<DashboardScreen>
             mainAxisSize: MainAxisSize.min,
             children: [
               DropdownButtonFormField<String>(
-                value: voucherType,
+                initialValue: voucherType,
                 decoration: const InputDecoration(labelText: 'Voucher Type'),
                 items: ['CPV', 'BPV', 'JV', 'Petty Cash']
                     .map((v) => DropdownMenuItem(value: v, child: Text(v)))
@@ -438,7 +444,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                 ),
               ),
               DropdownButtonFormField<int>(
-                value: selectedWarehouseId,
+                initialValue: selectedWarehouseId,
                 decoration: const InputDecoration(labelText: 'Warehouse'),
                 items: _warehouses
                     .map(
@@ -616,7 +622,7 @@ class _DashboardScreenState extends State<DashboardScreen>
             mainAxisSize: MainAxisSize.min,
             children: [
               DropdownButtonFormField<dynamic>(
-                value: selectedItem,
+                initialValue: selectedItem,
                 items: _stock
                     .map(
                       (s) => DropdownMenuItem(
@@ -635,7 +641,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                 decoration: const InputDecoration(labelText: 'Quantity'),
               ),
               DropdownButtonFormField<String>(
-                value: paymentMethod,
+                initialValue: paymentMethod,
                 decoration: const InputDecoration(labelText: 'Payment Gateway'),
                 items: ['Cash', 'JazzCash', 'EasyPaisa']
                     .map((m) => DropdownMenuItem(value: m, child: Text(m)))
@@ -708,7 +714,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                 ),
               ),
               DropdownButtonFormField<String>(
-                value: mediaType,
+                initialValue: mediaType,
                 items: const [
                   DropdownMenuItem(value: 'text', child: Text('Text Only')),
                   DropdownMenuItem(value: 'photo', child: Text('Photo Link')),
@@ -737,7 +743,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               ),
               onPressed: () async {
                 await http.post(
-                  Uri.parse('http://localhost:3000/api/postings'),
+                  Uri.parse('https://fincorebackend.vercel.app/api/postings'),
                   headers: {'Content-Type': 'application/json'},
                   body: jsonEncode({
                     'author': widget.username,
